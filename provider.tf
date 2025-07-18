@@ -4,6 +4,10 @@ terraform {
       source  = "scaleway/scaleway"
       version = "2.57.0"
     }
+    helm = {
+      source  = "hashicorp/helm"
+      version = "3.0.2"
+    }
   }
 }
 
@@ -11,4 +15,15 @@ provider "scaleway" {
   project_id = "af37e4fc-e172-4e7b-807d-932ea1afe8dd"
   zone       = "fr-par-2"
   region     = "fr-par"
+}
+
+
+provider "helm" {
+  kubernetes = {
+    host  = null_resource.kubeconfig.triggers.host
+    token = null_resource.kubeconfig.triggers.token
+    cluster_ca_certificate = base64decode(
+      null_resource.kubeconfig.triggers.cluster_ca_certificate
+    )
+  }
 }

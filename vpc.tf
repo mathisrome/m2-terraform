@@ -1,20 +1,20 @@
 resource "scaleway_vpc" "main" {
-  name = "kubernetes-vpc-grp4"
+  name = "grp-4-kubernetes-vpc"
 }
 
 resource "scaleway_vpc_private_network" "main" {
-  name     = "Private-network-grp4"
-  vpc_id   = scaleway_vpc.main.id
+  name   = "grp-4-private-network"
+  vpc_id = scaleway_vpc.main.id
 }
 
 resource "scaleway_vpc_public_gateway_ip" "main" {
-  count      = 1
+  count = 1
 }
 
 resource "scaleway_vpc_public_gateway" "main" {
-  name           = "gateway-grp4"
-  type           = "VPC-GW-S"
-  ip_id          = scaleway_vpc_public_gateway_ip.main[0].id
+  name  = "grp-4-gateway"
+  type  = "VPC-GW-S"
+  ip_id = scaleway_vpc_public_gateway_ip.main[0].id
 }
 
 resource "scaleway_vpc_gateway_network" "main" {
