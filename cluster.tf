@@ -4,6 +4,8 @@ resource "scaleway_k8s_cluster" "cluster" {
   cni                         = "cilium"
   private_network_id          = scaleway_vpc_private_network.main.id
   delete_additional_resources = false
+
+  tags = ["grp-4-cluster"]
 }
 
 resource "scaleway_k8s_pool" "pool" {
@@ -13,6 +15,8 @@ resource "scaleway_k8s_pool" "pool" {
   size        = 1
   autoscaling = true
   autohealing = true
+
+  tags = ["grp-4-pool"]
 }
 
 resource "null_resource" "kubeconfig" {

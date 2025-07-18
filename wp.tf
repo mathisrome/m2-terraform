@@ -4,6 +4,7 @@ resource "helm_release" "wordpress" {
 
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "wordpress"
+  version    = "25.0.3"
 
   set = [
     {
