@@ -16,7 +16,7 @@ resource "scaleway_vpc_public_gateway_ip" "main" {
 }
 
 resource "scaleway_vpc_public_gateway" "main" {
-  name  = "grp-4-gateway"
+  name  = "grp_4_gateway"
   type  = "VPC-GW-S"
   ip_id = scaleway_vpc_public_gateway_ip.main[0].id
   tags  = ["grp-4-public-gateway"]
