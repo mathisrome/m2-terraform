@@ -1,5 +1,5 @@
 resource "scaleway_k8s_cluster" "cluster" {
-  name                        = "groupe-4"
+  name                        = "grp-4"
   version                     = "1.32.3"
   cni                         = "cilium"
   private_network_id          = scaleway_vpc_private_network.main.id
@@ -8,7 +8,7 @@ resource "scaleway_k8s_cluster" "cluster" {
 
 resource "scaleway_k8s_pool" "pool" {
   cluster_id  = scaleway_k8s_cluster.cluster.id
-  name        = "tf-pool"
+  name        = "grp-4-pool-1"
   node_type   = "DEV1-M"
   size        = 1
   autoscaling = true
