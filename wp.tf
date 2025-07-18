@@ -51,10 +51,6 @@ resource "helm_release" "wordpress" {
       value = "true"
     },
     {
-      name  = "mariadb.auth.rootPassword"
-      value = "SecureDatabasePassword123!"
-    },
-    {
       name  = "mariadb.auth.database"
       value = "wordpress"
     },
