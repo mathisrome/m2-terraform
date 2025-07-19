@@ -43,3 +43,57 @@ resource "helm_release" "nginx_ingress" {
   //  value = "true"
   //}
 }
+
+
+
+
+
+resource "helm_release" "cert_manager" {
+  name      = "grp-4-cert-manager"
+  namespace = "kube-system"
+
+  repository = "https://charts.jetstack.io"
+  chart      = "cert-manager"
+  version    = "1.18.2"
+
+  set = [
+    {
+      name  = "installCRDs"
+      value = true
+    }
+  ]
+}
+
+
+resource "kubernetes_manifest" "issuer" {
+  depends_on = [
+    helm_release.cert_manager
+  ]
+  manifest = {
+    "apiVersion" = "cert-manager.io/v1"
+    "kind"       = "Issuer"
+    "metadata" = {
+      "name"      = "letsencrypt-prod"
+      "namespace" = "kube-system"
+    }
+    "spec" = {
+      "acme" = {
+        server = "https://acme-staging-v02.api.letsencrypt.org/directory"
+        email = "mrome@myges.fr"
+        profile = "tlsserver"
+        privateKeySecretRef = {
+          name = "letsencrypt-prod"
+        }
+        solvers = [
+          {
+            "http01" = {
+              ingress = {
+                ingressClassName = "nginx"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -8,6 +8,11 @@ terraform {
       source  = "hashicorp/helm"
       version = "3.0.2"
     }
+
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "2.37.1"
+    }
   }
   required_version = "1.12.2"
 }
@@ -27,4 +32,12 @@ provider "helm" {
       null_resource.kubeconfig.triggers.cluster_ca_certificate
     )
   }
+}
+
+provider "kubernetes" {
+  host                   = null_resource.kubeconfig.triggers.host
+  token                  = null_resource.kubeconfig.triggers.token
+  cluster_ca_certificate = base64decode(
+    null_resource.kubeconfig.triggers.cluster_ca_certificate
+  )
 }

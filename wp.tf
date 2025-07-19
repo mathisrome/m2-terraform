@@ -20,6 +20,14 @@ resource "helm_release" "wordpress" {
       value = "nginx"
     },
     {
+      name  = "ingress.tls"
+      value = true
+    },
+    {
+      name  = "ingress.annotations.cert-manager\\.io/issuer"
+      value = "letsencrypt-prod"
+    },
+    {
       name  = "ingress.hostname"
       value = data.scaleway_domain_zone.main.id
     },
