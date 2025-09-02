@@ -2,7 +2,7 @@ terraform {
   required_providers {
     scaleway = {
       source  = "scaleway/scaleway"
-      version = "2.57.0"
+      version = "2.59.0"
     }
     helm = {
       source  = "hashicorp/helm"
@@ -14,7 +14,7 @@ terraform {
       version = "2.37.1"
     }
   }
-  required_version = "1.12.2"
+  required_version = "1.13.1"
 }
 
 provider "scaleway" {

@@ -1,6 +1,6 @@
 data "scaleway_domain_zone" "main" {
-  domain    = "slashops.fr"
-  subdomain = "grp-4.esgi"
+  domain    = "esgi.slashops.fr"
+  subdomain = "grp-4"
 }
 
 resource "scaleway_domain_record" "www" {
